@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-solidity-align-comments",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Prettier plugin for Solidity that automatically aligns trailing comments for better code readability",
   "type": "module",
   "main": "prettier-plugin-solidity-align-comments.mjs",
@@ -32,7 +32,7 @@
     "prettier-plugin-solidity": "^1.0.0"
   },
   "devDependencies": {
-    "prettier": "^3.3.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-solidity": "^1.4.1"
   },
   "files": [
@@ -48,4 +48,3 @@
     "prepublishOnly": "npm run format"
   }
 }
-
