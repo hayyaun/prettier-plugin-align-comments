@@ -111,10 +111,10 @@ bool public isActive;                                // Active flag
 pragma solidity ^0.8.0;
 
 contract MyContract {
-  uint256 public totalSupply;                  // Total token supply
-  address public owner;                        // Contract owner
-  mapping(address => uint256) public balances; // User balances
-  bool public paused;                          // Pause state
+  uint256 public totalSupply; // Total token supply
+  address public owner;   // Contract owner
+  mapping(address => uint256) public balances;      // User balances
+  bool public paused;        // Pause state
 }
 ```
 
@@ -138,16 +138,16 @@ contract MyContract {
 
 ```solidity
 contract Token {
-  string public name;         // Token name
-  string public symbol;       // Token symbol
-  uint8 public decimals;      // Decimal places
-  uint256 public totalSupply; // Total supply
+  string public name;    // Token name
+  string public symbol;  // Token symbol
+  uint8 public decimals;       // Decimal places
+  uint256 public totalSupply;  // Total supply
 
-  mapping(address => uint256) public balanceOf;                     // Balance tracking
-  mapping(address => mapping(address => uint256)) public allowance; // Allowance tracking
+  mapping(address => uint256) public balanceOf;  // Balance tracking
+  mapping(address => mapping(address => uint256)) public allowance;   // Allowance tracking
 
-  address public owner; // Contract owner
-  bool public paused;   // Pause state
+  address public owner;  // Contract owner
+  bool public paused;         // Pause state
 }
 ```
 
