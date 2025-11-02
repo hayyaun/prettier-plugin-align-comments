@@ -5,6 +5,7 @@ import prettier from 'prettier';
 import originalPlugin from 'prettier-plugin-solidity';
 
 const { printDocToString } = prettier.doc.printer;
+const { builders } = prettier.doc;
 
 // Register custom option for Prettier v3
 const options = {
@@ -90,7 +91,7 @@ function alignComments(text, alignColumn = -1) {
 }
 
 // Get the original printer
-const originalPrinter = originalPlugin.printers['slang-ast'];
+const originalPrinter = originalPlugin.printers['solidity-ast'];
 
 // Create a wrapped printer that post-processes at the root level
 const wrappedPrinter = {
@@ -100,8 +101,8 @@ const wrappedPrinter = {
 
     // Only post-process at the root level (SourceUnit)
     const node = path.getValue();
-    if (node.kind === 'SourceUnit') {
-      // Convert doc to string, align comments, and return as string
+    if (node.type === 'SourceUnit') {
+      // Convert doc to string, align comments, and return as doc
       const printed = printDocToString(doc, {
         printWidth: options.printWidth,
         tabWidth: options.tabWidth,
@@ -110,7 +111,7 @@ const wrappedPrinter = {
 
       const aligned = alignComments(printed.formatted, options.solidityAlignColumn);
 
-      // Return the aligned string directly
+      // Return the aligned text directly
       return aligned;
     }
 
@@ -123,6 +124,6 @@ export default {
   options,
   printers: {
     ...originalPlugin.printers,
-    'slang-ast': wrappedPrinter,
+    'solidity-ast': wrappedPrinter,
   },
 };

@@ -16,9 +16,8 @@
         "useTabs": false,
         "singleQuote": false,
         "bracketSpacing": false,
-        "explicitTypes": "always"
+        "solidityAlignColumn": -1
       }
     }
   ]
 }
-

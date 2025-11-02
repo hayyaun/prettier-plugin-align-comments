@@ -26,7 +26,7 @@ console.log(unformattedCode);
 
 const formatted = await prettier.format(unformattedCode, {
   parser: 'solidity-parse',
-  plugins: [plugin],
+  plugins: [plugin], // Only our plugin needed - it wraps prettier-plugin-solidity
   printWidth: 80,
   tabWidth: 4,
   useTabs: false,
