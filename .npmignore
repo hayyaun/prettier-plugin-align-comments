@@ -1,0 +1,27 @@
+# Development files
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Examples (optional - remove this line if you want to include examples)
+examples/
+
+# Tests
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Documentation development
+docs/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Misc
+*.log
+.DS_Store
+

@@ -1,0 +1,51 @@
+{
+  "name": "prettier-plugin-solidity-align-comments",
+  "version": "1.0.0",
+  "description": "A Prettier plugin for Solidity that automatically aligns trailing comments for better code readability",
+  "type": "module",
+  "main": "prettier-plugin-solidity-align-comments.mjs",
+  "keywords": [
+    "prettier",
+    "prettier-plugin",
+    "solidity",
+    "comments",
+    "alignment",
+    "formatting",
+    "ethereum",
+    "smart-contracts"
+  ],
+  "author": "Hayyan Hami",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments/issues"
+  },
+  "homepage": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-solidity": "^1.4.1"
+  },
+  "files": [
+    "prettier-plugin-solidity-align-comments.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "format": "prettier --write '**/*.{js,mjs,json,md}'",
+    "format-example": "prettier --write --plugin ./prettier-plugin-solidity-align-comments.mjs examples/*.sol",
+    "demo": "node demo.mjs",
+    "verify": "node test-verify.mjs",
+    "prepublishOnly": "npm run format"
+  }
+}
+
