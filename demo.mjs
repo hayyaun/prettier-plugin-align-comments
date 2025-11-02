@@ -38,4 +38,3 @@ console.log(formatted);
 console.log('='.repeat(60));
 console.log('✅ Demo complete! Comments are now aligned.');
 console.log('='.repeat(60));
-

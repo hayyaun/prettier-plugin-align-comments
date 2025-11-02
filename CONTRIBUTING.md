@@ -7,6 +7,7 @@ Thank you for your interest in contributing! 🎉
 ### Reporting Bugs
 
 If you find a bug, please open an issue with:
+
 - A clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
@@ -16,6 +17,7 @@ If you find a bug, please open an issue with:
 ### Suggesting Enhancements
 
 Feature requests are welcome! Please open an issue with:
+
 - A clear description of the enhancement
 - Use cases and examples
 - Why this would be useful to other users
@@ -54,6 +56,7 @@ npm run format-example
 ### Testing
 
 Before submitting a PR:
+
 1. Test with the example files in `examples/`
 2. Create new examples if needed to demonstrate your changes
 3. Ensure no regressions in existing functionality
@@ -68,4 +71,3 @@ Before submitting a PR:
 ## Questions?
 
 Feel free to open an issue for any questions about contributing!
-

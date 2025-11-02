@@ -26,33 +26,33 @@ function alignComments(text, alignColumn = -1) {
 
   while (i < lines.length) {
     const line = lines[i];
-    
+
     // Check if this line has a trailing comment (statement ending with semicolon + comment)
     const match = line.match(/^(\s*)(.*?)(;)\s+(\/\/.*)$/);
-    
+
     if (match) {
       // Found a line with trailing comment, collect consecutive ones
       const group = [];
       let j = i;
-      
+
       while (j < lines.length) {
         const currentLine = lines[j];
         const currentMatch = currentLine.match(/^(\s*)(.*?)(;)\s+(\/\/.*)$/);
-        
+
         if (currentMatch) {
           group.push({
             indent: currentMatch[1],
             code: currentMatch[2],
             semicolon: currentMatch[3],
             comment: currentMatch[4],
-            fullLine: currentLine
+            fullLine: currentLine,
           });
           j++;
         } else {
           break;
         }
       }
-      
+
       // Align the group if we have more than one line
       if (group.length > 1) {
         // Find the maximum code length
@@ -61,12 +61,12 @@ function alignComments(text, alignColumn = -1) {
           const codeLen = (item.indent + item.code + item.semicolon).length;
           maxCodeLen = Math.max(maxCodeLen, codeLen);
         }
-        
+
         // Use fixed column if specified
         if (alignColumn > 0) {
           maxCodeLen = alignColumn - 1;
         }
-        
+
         // Rebuild the lines with aligned comments
         for (const item of group) {
           const codeLen = (item.indent + item.code + item.semicolon).length;
@@ -74,7 +74,7 @@ function alignComments(text, alignColumn = -1) {
           const aligned = item.indent + item.code + item.semicolon + ' '.repeat(padding) + item.comment;
           result.push(aligned);
         }
-        
+
         i = j;
       } else {
         result.push(line);
@@ -85,7 +85,7 @@ function alignComments(text, alignColumn = -1) {
       i++;
     }
   }
-  
+
   return result.join('\n');
 }
 
@@ -97,7 +97,7 @@ const wrappedPrinter = {
   ...originalPrinter,
   print(path, options, print) {
     const doc = originalPrinter.print(path, options, print);
-    
+
     // Only post-process at the root level (SourceUnit)
     const node = path.getValue();
     if (node.kind === 'SourceUnit') {
@@ -107,15 +107,15 @@ const wrappedPrinter = {
         tabWidth: options.tabWidth,
         useTabs: options.useTabs,
       });
-      
+
       const aligned = alignComments(printed.formatted, options.solidityAlignColumn);
-      
+
       // Return the aligned string directly
       return aligned;
     }
-    
+
     return doc;
-  }
+  },
 };
 
 export default {

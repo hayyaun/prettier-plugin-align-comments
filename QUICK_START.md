@@ -31,11 +31,13 @@ Create a `.prettierrc` file in your project root:
 ## 🚀 Usage
 
 ### Format a single file
+
 ```bash
 npx prettier --write MyContract.sol
 ```
 
 ### Format all Solidity files
+
 ```bash
 npx prettier --write "contracts/**/*.sol"
 ```
@@ -43,16 +45,19 @@ npx prettier --write "contracts/**/*.sol"
 ### IDE Integration
 
 #### VS Code
+
 1. Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 2. Enable "Format on Save" in settings
 3. Done! Your comments will auto-align when you save
 
 #### Other IDEs
+
 Most IDEs support Prettier. Check your IDE's documentation for Prettier integration.
 
 ## ✨ What You'll Get
 
 **Before:**
+
 ```solidity
 contract Token {
     string public name; // Token name
@@ -62,6 +67,7 @@ contract Token {
 ```
 
 **After:**
+
 ```solidity
 contract Token {
     string public name;         // Token name
@@ -73,19 +79,23 @@ contract Token {
 ## 🎛️ Options
 
 ### Auto-align (default)
+
 ```json
 {
   "solidityAlignColumn": -1
 }
 ```
+
 Comments align based on the longest line in each group.
 
 ### Fixed column
+
 ```json
 {
   "solidityAlignColumn": 60
 }
 ```
+
 All comments align to column 60.
 
 ## 📚 More Information
@@ -97,6 +107,7 @@ All comments align to column 60.
 ## 🐛 Issues?
 
 If something's not working:
+
 1. Make sure all packages are installed: `npm list prettier prettier-plugin-solidity`
 2. Check that your `.prettierrc` includes the plugin
 3. Try running with `--plugin` flag explicitly: `npx prettier --write --plugin prettier-plugin-solidity-align-comments MyContract.sol`
@@ -110,4 +121,3 @@ If something's not working:
 - It works with all Solidity constructs (variables, mappings, constants, etc.)
 
 Happy formatting! 🎉
-

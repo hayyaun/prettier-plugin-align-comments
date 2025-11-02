@@ -71,6 +71,7 @@ Controls how trailing comments are aligned:
 ```
 
 Result: Comments align to the longest line in each group
+
 ```solidity
 uint256 public value;     // Short line
 address public owner;     // Another line
@@ -94,6 +95,7 @@ bool public isActive;     // Active flag
 ```
 
 Result: All comments align to column 60
+
 ```solidity
 uint256 public value;                                // Short line
 address public owner;                                // Another line
@@ -133,32 +135,34 @@ contract MyContract {
 ### Complex Example
 
 **Before:**
+
 ```solidity
 contract Token {
     string public name; // Token name
     string public symbol; // Token symbol
     uint8 public decimals; // Decimal places
     uint256 public totalSupply; // Total supply
-    
+
     mapping(address => uint256) public balanceOf; // Balance tracking
     mapping(address => mapping(address => uint256)) public allowance; // Allowance tracking
-    
+
     address public owner; // Contract owner
     bool public paused; // Pause state
 }
 ```
 
 **After:**
+
 ```solidity
 contract Token {
     string public name;                                      // Token name
     string public symbol;                                    // Token symbol
     uint8 public decimals;                                   // Decimal places
     uint256 public totalSupply;                              // Total supply
-    
+
     mapping(address => uint256) public balanceOf;            // Balance tracking
     mapping(address => mapping(address => uint256)) public allowance; // Allowance tracking
-    
+
     address public owner;                                    // Contract owner
     bool public paused;                                      // Pause state
 }
@@ -207,6 +211,7 @@ npm list prettier prettier-plugin-solidity
 ### Comments not aligning
 
 The plugin only aligns **trailing comments** on consecutive lines that:
+
 - End with a semicolon
 - Have a `//` comment after the semicolon
 - Are part of a group (2+ consecutive lines)
@@ -234,4 +239,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [Prettier](https://prettier.io/)
 - [prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity)
 - [Solidity Documentation](https://docs.soliditylang.org/)
-
