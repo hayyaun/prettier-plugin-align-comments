@@ -102,10 +102,10 @@ const wrappedPrinter = {
 
     // Only post-process at the root level (SourceUnit)
     const node = path.getValue();
-    
+
     // Support both node.type (v1.x) and node.kind (v2.x)
     const nodeType = node.type || node.kind;
-    
+
     if (nodeType === 'SourceUnit') {
       // Convert doc to string, align comments, and return as doc
       const printed = printDocToString(doc, {

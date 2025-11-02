@@ -36,7 +36,7 @@ Feature requests are welcome! Please open an issue with:
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/prettier-plugin-solidity-align-comments.git
+git clone https://github.com/hayyaun/prettier-plugin-solidity-align-comments.git
 cd prettier-plugin-solidity-align-comments
 
 # Install dependencies
