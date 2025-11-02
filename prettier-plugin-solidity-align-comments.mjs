@@ -90,8 +90,9 @@ function alignComments(text, alignColumn = -1) {
   return result.join('\n');
 }
 
-// Get the original printer
-const originalPrinter = originalPlugin.printers['solidity-ast'];
+// Detect which printer to use (supports both v1 and v2 of prettier-plugin-solidity)
+const printerName = originalPlugin.printers['solidity-ast'] ? 'solidity-ast' : 'slang-ast';
+const originalPrinter = originalPlugin.printers[printerName];
 
 // Create a wrapped printer that post-processes at the root level
 const wrappedPrinter = {
@@ -101,7 +102,11 @@ const wrappedPrinter = {
 
     // Only post-process at the root level (SourceUnit)
     const node = path.getValue();
-    if (node.type === 'SourceUnit') {
+    
+    // Support both node.type (v1.x) and node.kind (v2.x)
+    const nodeType = node.type || node.kind;
+    
+    if (nodeType === 'SourceUnit') {
       // Convert doc to string, align comments, and return as doc
       const printed = printDocToString(doc, {
         printWidth: options.printWidth,
@@ -124,6 +129,6 @@ export default {
   options,
   printers: {
     ...originalPlugin.printers,
-    'solidity-ast': wrappedPrinter,
+    [printerName]: wrappedPrinter,
   },
 };

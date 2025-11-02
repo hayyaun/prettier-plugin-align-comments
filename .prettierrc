@@ -7,6 +7,7 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "arrowParens": "avoid",
+  "plugins": ["./prettier-plugin-solidity-align-comments.mjs"],
   "overrides": [
     {
       "files": "*.sol",
