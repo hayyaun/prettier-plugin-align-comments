@@ -1,7 +1,7 @@
 // prettier-plugin-align-comments.mjs
 // Universal Prettier plugin to align trailing comments across all programming languages
 
-import * as prettierModule from 'prettier';
+import * as prettierModule from "prettier";
 
 // Access prettier APIs
 const prettier = prettierModule.default || prettierModule;
@@ -9,16 +9,17 @@ const prettier = prettierModule.default || prettierModule;
 // Register custom options for Prettier v3
 export const options = {
   alignColumn: {
-    category: 'Global',
-    type: 'int',
+    category: "Global",
+    type: "int",
     default: -1,
-    description: 'Column to align trailing comments (-1 = auto-align, >0 = fixed column)',
+    description:
+      "Column to align trailing comments (-1 = auto-align, >0 = fixed column)",
   },
   alignMinConsecutive: {
-    category: 'Global',
-    type: 'int',
+    category: "Global",
+    type: "int",
     default: 2,
-    description: 'Minimum consecutive lines to trigger alignment (default: 2)',
+    description: "Minimum consecutive lines to trigger alignment (default: 2)",
   },
 };
 
@@ -29,66 +30,71 @@ export const options = {
  */
 const PARSER_PATTERNS = {
   // JavaScript, TypeScript, and variants (C-style comments with semicolons)
-  'babel': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'typescript': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'babel-ts': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'babel-flow': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'flow': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'espree': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'meriyah': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'acorn': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  '__js_expression': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  '__ts_expression': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  '__vue_expression': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  '__vue_ts_expression': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'angular': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'lwc': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  
+  babel: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  typescript: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  "babel-ts": /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  "babel-flow": /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  flow: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  espree: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  meriyah: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  acorn: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  __js_expression: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  __ts_expression: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  __vue_expression: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  __vue_ts_expression: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  angular: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  lwc: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+
   // CSS and variants
-  'css': /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
-  'scss': /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
-  'less': /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
-  
+  css: /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
+  scss: /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
+  less: /^(\s*)(.*?)([;])\s+(\/\/.*)$/,
+
   // JSON (with comments - JSON5, JSONC)
-  'json': /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
-  'json5': /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
-  'json-stringify': /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
-  
+  json: /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
+  json5: /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
+  "json-stringify": /^(\s*)(.*?)([,])\s+(\/\/.*)$/,
+
   // YAML (hash comments)
-  'yaml': /^(\s*)(.+?)([:,])\s+(#.*)$/,
-  
+  yaml: /^(\s*)(.+?)([:,])\s+(#.*)$/,
+
   // GraphQL (hash comments)
-  'graphql': /^(\s*)(.+?)()\s+(#.*)$/,
-  
+  graphql: /^(\s*)(.+?)()\s+(#.*)$/,
+
   // PHP (C-style comments)
-  'php': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  
+  php: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+
   // Solidity (C-style comments with semicolons)
-  'solidity-parse': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'solidity-ast': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  'slang-ast': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
-  
+  "solidity-parse": /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  "solidity-ast": /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  "slang-ast": /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+
   // Markdown (HTML comments)
-  'markdown': /^(\s*)(.+?)()\s+(<!--.*?-->)$/,
-  'mdx': /^(\s*)(.+?)()\s+(<!--.*?-->)$/,
-  
+  markdown: /^(\s*)(.+?)()\s+(<!--.*?-->)$/,
+  mdx: /^(\s*)(.+?)()\s+(<!--.*?-->)$/,
+
   // HTML and variants (HTML comments)
-  'html': /^(\s*)(.*?)(>)\s+(<!--.*?-->)$/,
-  'vue': /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
+  html: /^(\s*)(.*?)(>)\s+(<!--.*?-->)$/,
+  vue: /^(\s*)(.*?)([;,])\s+(\/\/.*)$/,
 };
 
 /**
  * Get the appropriate pattern for a given parser
  */
 function getPatternForParser(parser) {
-  return PARSER_PATTERNS[parser] || PARSER_PATTERNS['babel']; // Default to C-style
+  return PARSER_PATTERNS[parser] || PARSER_PATTERNS["babel"]; // Default to C-style
 }
 
 /**
  * Post-process formatted code to align trailing comments
  */
-export function alignComments(text, pattern, alignColumn = -1, minConsecutive = 2) {
-  const lines = text.split('\n');
+export function alignComments(
+  text,
+  pattern,
+  alignColumn = -1,
+  minConsecutive = 2,
+) {
+  const lines = text.split("\n");
   const result = [];
   let i = 0;
 
@@ -111,7 +117,7 @@ export function alignComments(text, pattern, alignColumn = -1, minConsecutive = 
           group.push({
             indent: currentMatch[1],
             code: currentMatch[2],
-            terminator: currentMatch[3] || '',
+            terminator: currentMatch[3] || "",
             comment: currentMatch[4],
             fullLine: currentLine,
           });
@@ -139,7 +145,12 @@ export function alignComments(text, pattern, alignColumn = -1, minConsecutive = 
         for (const item of group) {
           const codeLen = (item.indent + item.code + item.terminator).length;
           const padding = Math.max(1, maxCodeLen - codeLen + 1);
-          const aligned = item.indent + item.code + item.terminator + ' '.repeat(padding) + item.comment;
+          const aligned =
+            item.indent +
+            item.code +
+            item.terminator +
+            " ".repeat(padding) +
+            item.comment;
           result.push(aligned);
         }
 
@@ -157,13 +168,13 @@ export function alignComments(text, pattern, alignColumn = -1, minConsecutive = 
     }
   }
 
-  return result.join('\n');
+  return result.join("\n");
 }
 
 /**
  * Helper function to wrap an existing plugin (for plugins like Solidity)
  * This is used when you need to wrap a language-specific plugin
- * 
+ *
  * Usage:
  *   import { wrapPlugin } from 'prettier-plugin-align-comments';
  *   import solidityPlugin from 'prettier-plugin-solidity';
@@ -171,11 +182,13 @@ export function alignComments(text, pattern, alignColumn = -1, minConsecutive = 
  */
 export function wrapPlugin(originalPlugin, parserName = null) {
   const wrappedPrinters = {};
-  
+
   if (originalPlugin.printers) {
-    for (const [printerName, printer] of Object.entries(originalPlugin.printers)) {
+    for (const [printerName, printer] of Object.entries(
+      originalPlugin.printers,
+    )) {
       const actualParserName = parserName || printerName;
-      
+
       wrappedPrinters[printerName] = {
         ...printer,
         print(path, options, print) {
@@ -183,17 +196,17 @@ export function wrapPlugin(originalPlugin, parserName = null) {
 
           // Only post-process at the root level
           const node = path.getValue();
-          
+
           // Different parsers have different root node indicators
-          const isRoot = 
-            node.type === 'File' ||           // Babel
-            node.type === 'Program' ||        // Many parsers
-            node.type === 'SourceUnit' ||     // Solidity
-            node.type === 'Module' ||         // Some languages
-            node.kind === 'SourceUnit' ||     // Solidity v2
-            node.type === 'Document' ||       // YAML, GraphQL
-            node.type === 'Root' ||           // Markdown
-            path.stack.length <= 1;           // Fallback: we're at the root
+          const isRoot =
+            node.type === "File" || // Babel
+            node.type === "Program" || // Many parsers
+            node.type === "SourceUnit" || // Solidity
+            node.type === "Module" || // Some languages
+            node.kind === "SourceUnit" || // Solidity v2
+            node.type === "Document" || // YAML, GraphQL
+            node.type === "Root" || // Markdown
+            path.stack.length <= 1; // Fallback: we're at the root
 
           if (isRoot) {
             try {
@@ -207,20 +220,20 @@ export function wrapPlugin(originalPlugin, parserName = null) {
 
               // Get the parser-specific pattern
               const pattern = getPatternForParser(actualParserName);
-              
+
               // Align comments
               const aligned = alignComments(
                 printed.formatted,
                 pattern,
                 options.alignColumn,
-                options.alignMinConsecutive
+                options.alignMinConsecutive,
               );
 
               // Return the aligned text
               return aligned;
             } catch (error) {
               // If something goes wrong, return the original doc
-              console.error('prettier-plugin-align-comments error:', error);
+              console.error("prettier-plugin-align-comments error:", error);
               return doc;
             }
           }
@@ -230,7 +243,7 @@ export function wrapPlugin(originalPlugin, parserName = null) {
       };
     }
   }
-  
+
   return {
     ...originalPlugin,
     options: {
