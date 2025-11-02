@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-align-comments",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Utility for aligning trailing comments in Prettier-formatted code",
   "type": "module",
   "main": "prettier-plugin-align-comments.mjs",
@@ -25,12 +25,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments.git"
+    "url": "https://github.com/hayyaun/prettier-plugin-align-comments.git"
   },
   "bugs": {
-    "url": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments/issues"
+    "url": "https://github.com/hayyaun/prettier-plugin-align-comments/issues"
   },
-  "homepage": "https://github.com/hayyaun/prettier-plugin-solidity-align-comments#readme",
+  "homepage": "https://github.com/hayyaun/prettier-plugin-align-comments#readme",
   "engines": {
     "node": ">=14.0.0"
   },
